@@ -1,2 +1,1 @@
-export const frontendURI = "http://localhost:3000"
-export const backendURI = "http://localhost:3001"
+export const backendURI = "https://highway-delite-assignment-1.onrender.com"
