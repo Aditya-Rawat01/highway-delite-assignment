@@ -4,18 +4,20 @@ import Link from 'next/link';
 interface ExperienceCardProps {
   title: string;
   location: string;
-  price: string;
+  price: number;
+  description:string;
   image: string;
   highlighted?: boolean;
-  id?: string;
+  id: string;
 }
 
 export default function ExperienceCard({ 
   title, 
   location, 
+  description,
   price, 
   image,
-  id = '1'
+  id
 }: ExperienceCardProps) {
   return (
     <div className={`bg-white rounded-lg overflow-hidden shadow-md hover:shadow-2xl transition-shadow relative cursor-pointer`}>
@@ -41,7 +43,7 @@ export default function ExperienceCard({
         
         {/* Description */}
         <p className="text-xs text-gray-600 mb-3">
-          Curated small-group experience. Certified guide. Safety first with gear included.
+          {description}
         </p>
         
         {/* Price and CTA */}

@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛣️ Highway Delite Assignment
 
-## Getting Started
+## 🚀 Overview
 
-First, run the development server:
+This project is an **MVP/prototype** built using a modern JavaScript stack. While functional, it contains several areas that require improvement for a production environment.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Frontend** | Next.js + TypeScript | React Framework for the user interface. |
+| **Backend** | Express.js + TypeScript | REST API server. |
+| **Database** | Prisma + PostgreSQL | ORM and persistent data store. |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Setup and Installation
 
-## Learn More
+### Prerequisites
+You must have **Node.js** and an accessible **PostgreSQL** database instance.
 
-To learn more about Next.js, take a look at the following resources:
+### Installation Steps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository to your local machine.
+2. Run `npm install` in the **root** directory.
+3. Navigate to the `express-backend` directory and run `npm install` there as well.
+4. **Database Configuration:**
+    * Rename `/express-backend/envFile` to `.env`.
+    * Add your PostgreSQL connection URL to the new `.env` file (e.g., `DATABASE_URL="..."`).
+5. Run Prisma migrations and generation from the `express-backend` folder:
+    ```bash
+    npx prisma migrate dev
+    npx prisma generate
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Running the Servers
 
-## Deploy on Vercel
+* **Backend:** Start the Express server by running `npm run dev` inside the `express-backend` folder.
+* **Frontend:** Start the Next.js development server by running `npm run dev` in the **root** folder.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📌 Important Considerations
+
+1.  **Time Constraint:** Focus was given to delivering the assignment as **quickly as possible**.
+2.  **Required Improvements:** This project contains many improvements which are a **must** to deal with before production.
+3.  **Prototype Status:** The running instance is just an **MVP/prototype** of the actual product.

@@ -1,39 +1,105 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { checkoutAtom } from '@/atoms/checkoutState';
 import Image from 'next/image';
 import logo from '../../../assets/logo.png'
+import { toast } from 'sonner';
+import { backendURI } from '@/URI';
+import axios from 'axios';
 export default function Checkout({ params }: { params: Promise<{ id: string }> }) {
-    const para  = React.use(params)
+  useEffect(()=>{
+    const booking = localStorage.getItem("booking")
+    if (!booking) {
+      
+      const stringBooking = JSON.stringify(checkoutState)
+      localStorage.setItem("booking",stringBooking)
+      return
+    } else {
+
+      const jsonBooking = JSON.parse(booking)
+      if (jsonBooking.date && checkoutState.taxes==0) {
+        setCheckoutState(jsonBooking)
+
+      } else {
+        const stringBooking = JSON.stringify(checkoutState)
+        localStorage.setItem("booking",stringBooking)
+      }
+    }
+  },[])
+  const para  = React.use(params)
+  const [discount,setDiscount] = useState(0)
   const router = useRouter();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [promoCode, setPromoCode] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-  const checkoutState = useAtomValue(checkoutAtom)
+  const [checkoutState, setCheckoutState] = useAtom(checkoutAtom)
   // Booking details (these would come from context/state in a real app)
   const bookingDetails = {
     experience: checkoutState.experience,
     date:  checkoutState.date,
-    time: checkoutState.time,
+    time: checkoutState.time.slice(0,5),
     quantity: checkoutState.qty,
     subtotal: checkoutState.total,
     taxes: checkoutState.taxes,
-    total: checkoutState.qty + checkoutState.taxes
+    discount:discount,
+    promoCode,
+    total: checkoutState.total + checkoutState.taxes - discount
   };
 
-  const handleApplyPromo = () => {
+  const handleApplyPromo = async() => {
+    if (!promoCode) {
+      toast("Promo code is empty")
+      return
+    }
     // Promo code logic would go here
-    console.log('Applying promo code:', promoCode);
+    toast("Applying Promo code")
+    try {
+      const res = await axios.post(`${backendURI}/promo/validate`, {
+        promo:promoCode.toLowerCase()
+      })
+      setDiscount(res.data.discount)
+    } catch (error) {
+    toast("No such promo code found")
+      
+    }
+
   };
 
-  const handlePayAndConfirm = () => {
+  const handlePayAndConfirm = async() => {
     if (agreedToTerms && fullName && email) {
+      if (!(email.includes("@") && email.includes("."))) {
+        toast.error("Enter valid Email address")
+        return
+      }
+      if (fullName.length<5) {
+        toast.error("Name is too short...")
+        return
+      }
       // req to backend then push to frontend to show.  
+      try {
+        const res = await axios.post(`${backendURI}/bookings`, {
+          experience:bookingDetails.experience,
+          total:bookingDetails.total,
+          date:bookingDetails.date,
+          quantity:bookingDetails.quantity,
+          time:bookingDetails.time,
+          taxes:bookingDetails.taxes,
+          discount:bookingDetails.discount,
+          promoCode:bookingDetails.promoCode,
+          subtotal:bookingDetails.subtotal,
+  
+        })
+      } catch (error) {
+        toast.error((error as any).response.data.msg)
+        return
+      }
+
+
       router.push('/confirmation');
     }
 
@@ -152,7 +218,7 @@ export default function Checkout({ params }: { params: Promise<{ id: string }> }
                 </div>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-sm text-gray-600">Time</span>
-                  <span className="font-semibold">{bookingDetails.time}</span>
+                  <span className="font-semibold">{`${bookingDetails.time}`}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Qty</span>
@@ -166,10 +232,14 @@ export default function Checkout({ params }: { params: Promise<{ id: string }> }
                   <span className="text-gray-600">Subtotal</span>
                   <span className="font-semibold">₹{bookingDetails.subtotal}</span>
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mb-2">
                   <span className="text-gray-600">Taxes</span>
                   <span className="font-semibold">₹{bookingDetails.taxes}</span>
                 </div>
+                {discount!=0 && <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Discount</span>
+                  <span className="font-semibold text-green-500 text-lg">- ₹{bookingDetails.discount}</span>
+                </div>}
               </div>
 
               {/* Total */}
