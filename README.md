@@ -1,5 +1,8 @@
 # 🛣️ Highway Delite Assignment
 
+Deployed Frontend URI = [highway-delite-assignment-one.vercel.app](https://highway-delite-assignment-one.vercel.app)
+Deployed Backend URI = [highway-delite-assignment-one.vercel.app](https://highway-delite-assignment-1.onrender.com)
+
 ## 🚀 Overview
 
 This project is an **MVP/prototype** built using a modern JavaScript stack. While functional, it contains several areas that require improvement for a production environment.
@@ -8,8 +11,8 @@ This project is an **MVP/prototype** built using a modern JavaScript stack. Whil
 
 | Component | Technology | Description |
 | :--- | :--- | :--- |
-| **Frontend** | Next.js + TypeScript | React Framework for the user interface. |
-| **Backend** | Express.js + TypeScript | REST API server. |
+| **Frontend** | Next.js + TypeScript | React Framework for the user interface. | Vercel for deployment
+| **Backend** | Express.js + TypeScript | REST API server. | Render for deployment
 | **Database** | Prisma + PostgreSQL | ORM and persistent data store. |
 
 ---
