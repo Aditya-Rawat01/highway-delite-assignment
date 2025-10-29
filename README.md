@@ -2,7 +2,7 @@
 
 - Deployed Frontend URI = [highway-delite-assignment-one.vercel.app](https://highway-delite-assignment-one.vercel.app)
   
-- Deployed Backend URI = [highway-delite-assignment-one.vercel.app](https://highway-delite-assignment-1.onrender.com)
+- Deployed Backend URI = [highway-delite-assignment-1.vercel.app](https://highway-delite-assignment-1.onrender.com)
 
 ## 🚀 Overview
 
