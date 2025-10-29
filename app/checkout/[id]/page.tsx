@@ -122,9 +122,10 @@ export default function Checkout({ params }: { params: Promise<{ id: string }> }
 
       <input
       placeholder='Search Experiences'
-      className='p-2 w-80 bg-gray-100 rounded-md'
+      className='p-2 w-40 sm:w-80 bg-gray-100 rounded-md'
+
       />
-      <button className="bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded font-semibold text-sm transition-colors">
+      <button className="bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded font-semibold text-sm transition-colors hidden sm:block">
         Search
       </button>
       </div>
@@ -171,13 +172,13 @@ export default function Checkout({ params }: { params: Promise<{ id: string }> }
               </div>
 
               {/* Promo Code Row */}
-              <div className="flex gap-2 mb-4">
+              <div className="flex gap-2 mb-4 flex-wrap">
                 <input
                   type="text"
-                  placeholder="Promo code"
+                  placeholder="Demo code => 'flat25'"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)} // a req to check the validity.
-                  className="flex-1 px-4 py-3 bg-gray-100 rounded border border-gray-300 focus:outline-none focus:border-yellow-400"
+                  className="w-full sm:flex-1 px-4 py-3 bg-gray-100 rounded border border-gray-300 focus:outline-none focus:border-yellow-400"
                 />
                 <button
                   onClick={handleApplyPromo}

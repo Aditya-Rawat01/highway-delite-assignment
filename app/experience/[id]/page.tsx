@@ -121,10 +121,10 @@ export default function ExperienceDetail({
         <div className="flex gap-2">
           <input
             placeholder="Search Experiences"
-            className="p-2 w-80 bg-gray-100 rounded-md"
+            className='p-2 w-40 sm:w-80 bg-gray-100 rounded-md'
             onChange={(e) => setSearchExperience(e.target.value)}
           />
-          <button className="bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded font-semibold text-sm transition-colors">
+          <button className="bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded font-semibold text-sm transition-colors hidden sm:block">
             Search
           </button>
         </div>
@@ -173,7 +173,7 @@ export default function ExperienceDetail({
             {/* Choose Date */}
             <div className="mb-6">
               <h2 className="text-lg font-semibold mb-3">Choose date</h2>
-              <div className="flex gap-3">
+              <div className="flex gap-3 overflow-scroll">
                 {dates.map((date: any, index: any) => {
                   const dateVal = new Date(date);
                   return (
@@ -205,7 +205,7 @@ export default function ExperienceDetail({
             {/* Choose Time */}
             <div className="mb-6">
               <h2 className="text-lg font-semibold mb-3">Choose time</h2>
-              <div className="flex gap-3">
+              <div className="flex gap-3 overflow-scroll">
                 {timesByDate[selectedIncrement].map(
                   (time: string, index: number) => {
                     const slots = slotsByDate[selectedIncrement]; // this is still an array of objects.

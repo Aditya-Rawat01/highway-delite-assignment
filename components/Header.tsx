@@ -36,10 +36,10 @@ export default function Header() {
 
       <input
       placeholder='Search Experiences'
-      className='p-2 w-80 bg-gray-100 rounded-md'
+      className='p-2 w-40 sm:w-80 bg-gray-100 rounded-md'
       onChange={(e)=>setSearchExperience(e.target.value)}
       />
-      <button className="bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded font-semibold text-sm transition-colors">
+      <button className="bg-yellow-400 hover:bg-yellow-500 px-6 py-2 rounded font-semibold text-sm transition-colors hidden sm:block">
         Search
       </button>
       </div>
